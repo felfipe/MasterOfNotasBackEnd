@@ -1,0 +1,22 @@
+{
+  "name": "masterofnotasbackend",
+  "version": "1.0.0",
+  "description": "Repositório para a aplicação back-end do sistema MasterOfNotas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felfipe/MasterOfNotasBackEnd.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felfipe/MasterOfNotasBackEnd/issues"
+  },
+  "homepage": "https://github.com/felfipe/MasterOfNotasBackEnd#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
