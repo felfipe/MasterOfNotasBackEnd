@@ -4,7 +4,7 @@
   "description": "Repositório para a aplicação back-end do sistema MasterOfNotas",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,10 @@
   },
   "homepage": "https://github.com/felfipe/MasterOfNotasBackEnd#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0"
