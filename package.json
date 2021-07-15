@@ -17,6 +17,13 @@
   },
   "homepage": "https://github.com/felfipe/MasterOfNotasBackEnd#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }

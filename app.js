@@ -7,5 +7,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(port, () => {
+  require('./db-index')
   console.log('Ouvindo na porta' + port)
 })

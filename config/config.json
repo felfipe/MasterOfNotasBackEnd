@@ -1,0 +1,22 @@
+{
+  "username": "doadmin",
+  "password": "pbe1itm50cjsgvnr",
+  "database": "defaultdb",
+  "port": 25060,
+  "host": "db-master-of-notas-do-user-9520776-0.b.db.ondigitalocean.com",
+  "dialect": "postgres",
+  "dialectOptions": {
+    "ssl": {
+      "require": true,
+      "rejectUnauthorized": false
+    },
+    "keepAlive": true
+  },
+  "ssl": true,
+  "logging": false,
+  "seederStorage": "sequelize",
+  "define": {
+    "timestamps": true,
+    "underscored": true
+  }
+}
