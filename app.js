@@ -16,10 +16,14 @@ app.get('/', (req, res) => {
 
 
 app.post('/auth', async (req, res) => {
-  user = req.body.username
-  passwd = req.body.password
-  const query_response = await Aluno.findOne({ where: { login: user, password: passwd } })
-
+  try {
+    user = req.body.username
+    passwd = req.body.password
+    const query_response = await Aluno.findOne({ where: { login: user, password: passwd } })
+  } catch (e) {
+    res.status(500).json({ message: "Bad Requirement!" })
+    return
+  }
   if (query_response == null)
     res.status(500).json({ message: "Login Inválido!" })
   else {
