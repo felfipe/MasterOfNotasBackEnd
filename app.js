@@ -6,6 +6,7 @@ const port = 3000
 
 const jwt = require('jsonwebtoken')
 const Aluno = require('./models/aluno.js')
+const { query } = require('express')
 app.use(express.json())
 app.use(cors())
 
@@ -31,7 +32,7 @@ app.post('/auth', async (req, res) => {
     const token = jwt.sign({ id }, process.env.SECRET, {
       expiresIn: 1200 // 20 min
     })
-    res.json({ auth: true, token: token, username: query_response.name })
+    res.json({ auth: true, token: token, username: query_response.name, tipoUsuario: query_response.tipoUsuario })
   }
 })
 
