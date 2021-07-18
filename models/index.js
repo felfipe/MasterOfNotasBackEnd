@@ -1,12 +1,30 @@
-const Testes = require('./teste')
-const Aluno = require('./aluno')
+const Usuario = require('./usuario')
+const Disciplina = require('./disciplina')
+const Questao = require('./questao')
+const Alternativa = require('./alternativa')
+const AlunoDisciplina = require('./aluno-disciplina')
+const Questionario = require('./questionario')
+const Quizz = require('./quizz')
+const Resposta = require('./resposta')
 
 function initModels(connection) {
-  Testes.init(connection)
-  Aluno.init(connection)
+  Usuario.init(connection)
+  Disciplina.init(connection)
+  Questao.init(connection)
+  Alternativa.init(connection)
+  AlunoDisciplina.init(connection)
+  Questionario.init(connection)
+  Quizz.init(connection)
+  Resposta.init(connection)
 
-  Testes.associate(connection.models)
-  Aluno.associate(connection.models)
+  Usuario.associate(connection.models)
+  Disciplina.associate(connection.models)
+  Questao.associate(connection.models)
+  Alternativa.associate(connection.models)
+  AlunoDisciplina.associate(connection.models)
+  Questionario.associate(connection.models)
+  Quizz.associate(connection.models)
+  Resposta.associate(connection.models)
 }
 
 module.exports = { initModels }
