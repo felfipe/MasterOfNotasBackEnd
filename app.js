@@ -11,9 +11,12 @@ app.get('/', (req, res) => {
   res.send('<h1 style="color : blue;"> MasterOfNotas Back-End! <\h1>')
 })
 
-require('./routes/auth')(app)
+require('./routes/login')(app)
 require('./routes/signup')(app)
+
+// ---------------- Rotas professor ---------------- //
 require('./routes/professor/listar-alunos')(app)
+require('./routes/professor/criar-disciplinas')(app)
 
 app.listen(port, () => {
   require('./db-index')
