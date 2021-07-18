@@ -15,7 +15,7 @@ class AlunoDisciplina extends Model {
       as: 'aluno'
     })
 
-    this.belongsTo(models.Disicplina, {
+    this.belongsTo(models.Disciplina, {
       foreignKey: { field: 'disciplina_id', name: 'disciplinaId' },
       as: 'disciplina'
     })

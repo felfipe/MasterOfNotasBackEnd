@@ -1,34 +1,38 @@
-const Aluno = require("../models/aluno")
+const Usuario = require("../models/usuario")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const minutes = 60
+const minute = 60
 
 module.exports = function (app) {
-    app.post('/auth', async (req, res) => {
-        email = req.body.email
-        password = req.body.password
-        if (email == null || password == null) {
-            res.status(500).json({ message: "Bad Requirement!" })
-            return
-        }
+  app.post('/auth', async (req, res) => {
+    const { email, password } = req.body
 
-        const query_response = await Aluno.findOne({ where: { login: email } })
+    if (!email || !password) {
+      res.status(500).json({ message: "Bad Requirement!" })
+      return
+    }
+
+    const usuario = await Usuario.findOne({ where: { email } })
 
 
-        if (query_response == null)
-            res.status(500).json({ message: "Login Inválido!" })
-        else {
-            verifyPassword = await bcrypt.compare(password, query_response.password)
-            if (!verifyPassword) {
-                res.status(500).json({ message: "Login Inválido!" })
-                return
-            }
-            const id = query_response.login;
-            const token = jwt.sign({ id }, process.env.SECRET, {
-                expiresIn: 20 * minutes
-            })
-            res.json({ auth: true, token: token, name: query_response.name, userType: query_response.tipoUsuario })
-        }
-    })
+    if (!usuario)
+      res.status(500).json({ message: "Login Inválido!" })
+    else {
+      verifyPassword = await bcrypt.compare(password, usuario.senha)
+      if (!verifyPassword) {
+        res.status(500).json({ message: "Login Inválido!" })
+        return
+      }
+      const { id } = usuario;
+      const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 20 * minute })
+
+      res.json({
+        auth: true,
+        token: token,
+        name: usuario.nome,
+        userType: (usuario.tipoUsuario == 'P') ? "PROFESSOR" : "ALUNO"
+      })
+    }
+  })
 }
