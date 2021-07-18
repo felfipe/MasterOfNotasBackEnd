@@ -16,7 +16,8 @@ require('./routes/signup')(app)
 
 // ---------------- Rotas professor ---------------- //
 require('./routes/professor/listar-alunos')(app)
-require('./routes/professor/criar-disciplinas')(app)
+require('./routes/professor/criar-disciplina')(app)
+require('./routes/professor/set-alunos-disciplina')(app)
 
 app.listen(port, () => {
   require('./db-index')
