@@ -4,7 +4,7 @@ const app = express()
 const cors = require('cors')
 const port = 3000
 
-const jwt = require('jsonwebtoken')
+
 const Aluno = require('./models/aluno.js')
 const { query } = require('express')
 app.use(express.json())
@@ -15,26 +15,9 @@ app.get('/', (req, res) => {
 })
 
 
+require('./routes/auth')(app)
+require('./routes/signup')(app)
 
-app.post('/auth', async (req, res) => {
-  user = req.body.username
-  passwd = req.body.password
-  if (user == null || passwd == null) {
-    res.status(500).json({ message: "Bad Requirement!" })
-    return
-  }
-  const query_response = await Aluno.findOne({ where: { login: user, password: passwd } })
-
-  if (query_response == null)
-    res.status(500).json({ message: "Login Inválido!" })
-  else {
-    const id = query_response.id;
-    const token = jwt.sign({ id }, process.env.SECRET, {
-      expiresIn: 1200 // 20 min
-    })
-    res.json({ auth: true, token: token, username: query_response.name, tipoUsuario: query_response.tipoUsuario })
-  }
-})
 
 
 app.listen(port, () => {
