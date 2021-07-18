@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 
 require('./routes/auth')(app)
 require('./routes/signup')(app)
+require('./routes/professor/listar-alunos')(app)
 
 app.listen(port, () => {
   require('./db-index')
