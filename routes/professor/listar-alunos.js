@@ -3,8 +3,14 @@ const auth = require('../auth')
 
 module.exports = function (app) {
   app.get('/listarAlunos', async (req, res) => {
-    usuario = await auth(req, res)
-    if(!usuario) return
+    const professor = await auth(req, res)
+
+    if (!professor) return
+
+    if (professor.tipoUsuario !== 'P') {
+      res.status(401).json({ message: "access danied" })
+      return
+    }
 
     const alunos = await Usuario.findAll({ where: { tipoUsuario: 'A' } })
 

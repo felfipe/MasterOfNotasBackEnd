@@ -9,7 +9,7 @@ module.exports = function (app) {
     const { email, password } = req.body
 
     if (!email || !password) {
-      res.status(500).json({ message: "Bad Requirement!" })
+      res.status(400).json({ message: "bad resquest" })
       return
     }
 
@@ -17,11 +17,11 @@ module.exports = function (app) {
 
 
     if (!usuario)
-      res.status(500).json({ message: "Login Inválido!" })
+      res.status(401).json({ message: "invalid login" })
     else {
       verifyPassword = await bcrypt.compare(password, usuario.senha)
       if (!verifyPassword) {
-        res.status(500).json({ message: "Login Inválido!" })
+        res.status(401).json({ message: "invalid login" })
         return
       }
       const { id } = usuario;

@@ -5,18 +5,24 @@ const auth = require('../auth')
 
 module.exports = function (app) {
   app.post('/setAlunosDisciplina', async (req, res) => {
-    usuario = await auth(req, res)
-    if (!usuario) return
+    const professor = await auth(req, res)
+
+    if (!professor) return
+
+    if (professor.tipoUsuario !== 'P') {
+      res.status(401).json({ message: "access danied" })
+      return
+    }
 
     const { disciplineId: disciplinaId, alunos } = req.body
     if (!disciplinaId || !alunos) {
-      res.status(400).json({ message: "Bad Request!" })
+      res.status(400).json({ message: "bad request" })
       return
     }
 
     const disciplina = await Disciplina.findByPk(disciplinaId)
-    if (disciplina.emailProfessor !== usuario.email) {
-      res.status(500).json({ message: "Access Danied!" })
+    if (disciplina.emailProfessor !== professor.email) {
+      res.status(401).json({ message: "access danied" })
       return
     }
 
@@ -35,7 +41,7 @@ module.exports = function (app) {
       res.json({ status: 'OK' })
 
     }).catch(err => {
-      res.status(500).json({ message: `Error! ${err}` })
+      res.status(500).json({ message: `internal server error: ${err.message}` })
     })
 
   })

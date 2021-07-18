@@ -7,29 +7,29 @@ module.exports = function (app) {
   app.post('/signup', async (req, res) => {
     const { password, name: username, userType, email } = req.body
 
-    if (req.body.length != 4 && (!email || !password || !username || !userType)) {
-      res.status(500).json({ message: "Bad Requirement!" })
+    if (!email || !password || !username || !userType) {
+      res.status(400).json({ message: "bad request" })
       return
     }
 
     if (username == "" || (userType != "PROFESSOR" && userType != "ALUNO")) {
-      res.status(500).json({ message: "Empty name or type" })
+      res.status(400).json({ message: "bad request: empty name ou invalid type" })
       return
     }
 
     if (!email.includes('@') || !email.includes('.com')) {
-      res.status(500).json({ message: "Wrong usarname!" })
+      res.status(400).json({ message: "bad request: invalid email" })
       return
     }
 
     if (password.length < 6) {
-      res.status(500).json({ message: "Wrong password!" })
+      res.status(400).json({ message: "bad request: short password" })
       return
     }
 
     const emailInUse = await Usuario.findOne({ where: { email } })
     if (emailInUse) {
-      res.status(500).json({ message: "User already exists!" })
+      res.status(409).json({ message: "conflict: user already exists" })
       return
     }
 
@@ -41,13 +41,15 @@ module.exports = function (app) {
       senha: hash,
       nome: username,
       tipoUsuario: (userType == "PROFESSOR") ? 'P' : 'A'
+    }).catch(err => {
+      res.status(500).json({ message: `internal server error: ${err}` })
     })
 
-    if (!usuario) res.status(500).json({ message: "Invalid singup!" })
+    if (usuario) {
+      const { id } = usuario
+      const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 60 * minute })
 
-    const { id } = usuario
-    const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 60 * minute })
-
-    res.json({ auth: true, token: token, name: username, userType: userType })
+      res.json({ auth: true, token: token, name: username, userType: userType })
+    }
   })
 }
