@@ -21,6 +21,9 @@ require('./routes/professor/criar-questao')(app)
 require('./routes/professor/set-alunos-disciplina')(app)
 require('./routes/professor/atualizar-disciplina')(app)
 
+// ---------------- Rotas aluno ---------------- //
+require('./routes/aluno/listar-disciplinas')(app)
+
 app.listen(port, () => {
   require('./db-index')
   console.log(`Ouvindo na porta ${port}`)

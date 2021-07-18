@@ -14,7 +14,7 @@ module.exports = function (app) {
       return
     }
 
-    const { name: nome, initial: sigla, alunos = [] } = req.body
+    const { name: nome, initial: sigla, alunosId = [] } = req.body
     if (!nome) {
       res.status(400).json({ message: "bad request" })
       return
@@ -30,11 +30,11 @@ module.exports = function (app) {
       const disciplina = await Disciplina.create({
         nome,
         sigla,
-        emailProfessor: professor.email
+        professorId: professor.id
       }, { transaction: t })
 
-      const addAlunos = alunos.map(aluno => ({ disciplinaId: disciplina.id, emailAluno: aluno.email }))
-      const alunosInseridos = await AlunoDisciplina.bulkCreate(addAlunos, { transaction: t })
+      const addAlunos = alunosId.map(alunoId => ({ disciplinaId: disciplina.id, alunoId }))
+      await AlunoDisciplina.bulkCreate(addAlunos, { transaction: t })
 
       res.json({ id: disciplina.id })
 

@@ -14,7 +14,11 @@ module.exports = function (app) {
 
     const alunos = await Usuario.findAll({ where: { tipoUsuario: 'A' } })
 
-    const nomesAlunos = alunos.map(aluno => ({ name: aluno.nome, email: aluno.email }))
+    const nomesAlunos = alunos.map(aluno => ({
+      id: aluno.id,
+      name: aluno.nome,
+      email: aluno.email
+    }))
 
     res.json(nomesAlunos)
   })

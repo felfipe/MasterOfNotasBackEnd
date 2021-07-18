@@ -13,7 +13,7 @@ class Disciplina extends Model {
 
   static associate(models) {
     this.belongsTo(models.Usuario, {
-      foreignKey: { field: 'email_professor', name: 'emailProfessor' },
+      foreignKey: { field: 'professor_id', name: 'professorId' },
       as: 'professor'
     })
   }

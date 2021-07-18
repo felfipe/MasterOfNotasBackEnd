@@ -19,12 +19,12 @@ module.exports = {
         }
       },
 
-      email_aluno: {
-        type: Sequelize.STRING,
+      aluno_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'usuarios',
-          key: 'email'
+          key: 'id'
         }
       },
 

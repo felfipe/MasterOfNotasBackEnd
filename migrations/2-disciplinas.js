@@ -10,12 +10,12 @@ module.exports = {
         primaryKey: true
       },
 
-      email_professor: {
-        type: Sequelize.STRING,
+      professor_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'usuarios',
-          key: 'email'
+          key: 'id'
         }
       },
 

@@ -9,13 +9,13 @@ module.exports = {
         autoIncrement: true
       },
 
-      email_aluno: {
-        type: Sequelize.STRING,
+      aluno_id: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,
         references: {
           model: 'usuarios',
-          key: 'email'
+          key: 'id'
         }
       },
 

@@ -7,12 +7,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
+        primaryKey: true
       },
 
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
+        unique: true
       },
 
       senha: {
