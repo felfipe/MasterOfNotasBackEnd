@@ -17,6 +17,7 @@ require('./routes/signup')(app)
 // ---------------- Rotas professor ---------------- //
 require('./routes/professor/listar-alunos')(app)
 require('./routes/professor/criar-disciplina')(app)
+require('./routes/professor/criar-questao')(app)
 require('./routes/professor/set-alunos-disciplina')(app)
 require('./routes/professor/atualizar-disciplina')(app)
 
