@@ -12,6 +12,7 @@ module.exports = async (req, res) => {
       return
     }
     return usuario
+
   } catch (error) {
     res.status(500).json({ message: "Access Danied!" })
     return

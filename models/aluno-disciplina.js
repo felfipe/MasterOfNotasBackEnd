@@ -11,7 +11,7 @@ class AlunoDisciplina extends Model {
 
   static associate(models) {
     this.belongsTo(models.Usuario, {
-      foreignKey: 'email',
+      foreignKey: { field: 'email_aluno', name: 'emailAluno' },
       as: 'aluno'
     })
 
