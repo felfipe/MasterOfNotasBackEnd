@@ -2,6 +2,8 @@ const Aluno = require("../models/aluno")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+const minutes = 60
+
 module.exports = function (app) {
     app.post('/auth', async (req, res) => {
         email = req.body.email
@@ -24,7 +26,7 @@ module.exports = function (app) {
             }
             const id = query_response.login;
             const token = jwt.sign({ id }, process.env.SECRET, {
-                expiresIn: 1200 // 20 min
+                expiresIn: 20 * minutes
             })
             res.json({ auth: true, token: token, name: query_response.name, userType: query_response.tipoUsuario })
         }
