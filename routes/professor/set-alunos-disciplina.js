@@ -8,7 +8,17 @@ module.exports = function (app) {
     usuario = await auth(req, res)
     if (!usuario) return
 
-    const { disciplineId: disciplinaId, alunos = [] } = req.body
+    const { disciplineId: disciplinaId, alunos } = req.body
+    if (!disciplinaId || !alunos) {
+      res.status(400).json({ message: "Bad Request!" })
+      return
+    }
+
+    const disciplina = await Disciplina.findByPk(disciplinaId)
+    if (disciplina.emailProfessor !== usuario.email) {
+      res.status(500).json({ message: "Access Danied!" })
+      return
+    }
 
     const alunosAtual = await AlunoDisciplina.findAll({ raw: true, where: { disciplinaId } })
 

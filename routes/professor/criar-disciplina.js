@@ -9,6 +9,10 @@ module.exports = function (app) {
     if (!usuario) return
 
     const { name: nome, initial: sigla, alunos = [] } = req.body
+    if (!nome) {
+      res.status(400).json({ message: "Bad Request!" })
+      return
+    }
 
     const disciplinaDuplicada = await Disciplina.findOne({ where: { nome, sigla } })
     if (disciplinaDuplicada) {

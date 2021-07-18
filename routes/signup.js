@@ -46,7 +46,7 @@ module.exports = function (app) {
     if (!usuario) res.status(500).json({ message: "Invalid singup!" })
 
     const { id } = usuario
-    const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 20 * minute })
+    const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 60 * minute })
 
     res.json({ auth: true, token: token, name: username, userType: userType })
   })

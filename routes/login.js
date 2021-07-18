@@ -25,7 +25,7 @@ module.exports = function (app) {
         return
       }
       const { id } = usuario;
-      const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 20 * minute })
+      const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 60 * minute })
 
       res.json({
         auth: true,
