@@ -1,7 +1,8 @@
 const sequelize = require('../../db-index')
+const auth = require('../auth')
+
 const Disciplina = require('../../models/disciplina')
 const AlunoDisciplina = require('../../models/aluno-disciplina')
-const auth = require('../auth')
 
 module.exports = function (app) {
   app.post('/criarDisciplina', async (req, res) => {
@@ -22,7 +23,7 @@ module.exports = function (app) {
 
     const disciplinaDuplicada = await Disciplina.findOne({ where: { nome, sigla } })
     if (disciplinaDuplicada) {
-      res.status(409).json({ message: "conflict: discipline already exists" })
+      res.status(409).json({ message: "discipline already exists" })
       return
     }
 

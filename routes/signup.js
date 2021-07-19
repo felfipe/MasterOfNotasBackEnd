@@ -1,6 +1,7 @@
-const Usuario = require("../models/usuario")
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const Usuario = require("../models/usuario")
+
 const minute = 60
 
 module.exports = function (app) {
@@ -29,7 +30,7 @@ module.exports = function (app) {
 
     const emailInUse = await Usuario.findOne({ where: { email } })
     if (emailInUse) {
-      res.status(409).json({ message: "conflict: user already exists" })
+      res.status(409).json({ message: "user already exists" })
       return
     }
 

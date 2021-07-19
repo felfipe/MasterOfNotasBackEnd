@@ -1,7 +1,8 @@
 const sequelize = require('../../db-index')
+const auth = require('../auth')
+
 const Disciplina = require('../../models/disciplina')
 const AlunoDisciplina = require('../../models/aluno-disciplina')
-const auth = require('../auth')
 
 module.exports = function (app) {
   app.post('/setAlunosDisciplina', async (req, res) => {

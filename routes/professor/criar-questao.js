@@ -1,8 +1,8 @@
 const sequelize = require('../../db-index')
-const Disciplina = require('../../models/disciplina')
+const auth = require('../auth')
+
 const Questao = require('../../models/questao')
 const Alternativa = require('../../models/alternativa')
-const auth = require('../auth')
 const Enquete = require('../../models/enquete')
 
 module.exports = function (app) {

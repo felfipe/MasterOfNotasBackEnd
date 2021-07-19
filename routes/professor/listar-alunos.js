@@ -1,5 +1,5 @@
-const Usuario = require("../../models/usuario")
 const auth = require('../auth')
+const Usuario = require("../../models/usuario")
 
 module.exports = function (app) {
   app.get('/listarAlunos', async (req, res) => {

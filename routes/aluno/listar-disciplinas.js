@@ -1,5 +1,5 @@
-const AlunoDisciplina = require("../../models/aluno-disciplina")
 const auth = require('../auth')
+const AlunoDisciplina = require("../../models/aluno-disciplina")
 
 module.exports = function (app) {
   app.get('/listarDisciplinasMatriculadas', async (req, res) => {

@@ -1,7 +1,7 @@
 const sequelize = require('../../db-index')
-const Disciplina = require('../../models/disciplina')
-const AlunoDisciplina = require('../../models/aluno-disciplina')
 const auth = require('../auth')
+
+const AlunoDisciplina = require('../../models/aluno-disciplina')
 const Enquete = require('../../models/enquete')
 const Questao = require('../../models/questao')
 const Questionario = require('../../models/questionario')
@@ -11,7 +11,7 @@ function getRandomInt(min, max) {
 }
 
 module.exports = function (app) {
-  app.post('/startEnquete', async (req, res) => {
+  app.post('/iniciarEnquete', async (req, res) => {
     const professor = await auth(req, res)
 
     if (!professor) return
@@ -35,7 +35,7 @@ module.exports = function (app) {
 
     const enqueteAtiva = await Enquete.findOne({ where: { disciplinaId: enquete.disciplinaId, ativo: true } })
     if (enqueteAtiva || enquete.ativo) {
-      res.status(409).json({ message: "conflict: quizz already started" })
+      res.status(409).json({ message: "quizz already started" })
       return
     }
 
@@ -43,7 +43,7 @@ module.exports = function (app) {
     const alunosMatriculados = await AlunoDisciplina.findAll({ where: { disciplinaId: enquete.disciplinaId } })
 
     if (bancoQuestoes.length < enquete.quantidade) {
-      res.status(409).json({ message: "conflict: insufficient database questions" })
+      res.status(409).json({ message: "insufficient database questions" })
       return
     }
 

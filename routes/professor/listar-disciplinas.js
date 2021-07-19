@@ -1,5 +1,5 @@
-const Disciplina = require("../../models/disciplina")
 const auth = require('../auth')
+const Disciplina = require("../../models/disciplina")
 
 module.exports = function (app) {
   app.get('/listarDisciplinas', async (req, res) => {

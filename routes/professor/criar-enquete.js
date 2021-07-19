@@ -1,10 +1,7 @@
-const { Op } = require('sequelize')
-const sequelize = require('../../db-index')
-const AlunoDisciplina = require('../../models/aluno-disciplina')
+const auth = require('../auth')
+
 const Disciplina = require('../../models/disciplina')
 const Enquete = require('../../models/enquete')
-const Questao = require('../../models/questao')
-const auth = require('../auth')
 
 module.exports = function (app) {
   app.post('/criarEnquete', async (req, res) => {
@@ -38,7 +35,7 @@ module.exports = function (app) {
       })
 
       if (enqueteAberta) {
-        res.status(409).json({ message: "conflict: quizz already opened" })
+        res.status(409).json({ message: "quizz already opened" })
         return
       }
     }
@@ -51,7 +48,7 @@ module.exports = function (app) {
     })
 
     if (nomeEnquete) {
-      res.status(409).json({ message: "conflict: quizz name in use" })
+      res.status(409).json({ message: "quizz name in use" })
       return
     }
 

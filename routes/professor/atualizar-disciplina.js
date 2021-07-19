@@ -1,5 +1,5 @@
-const Disciplina = require('../../models/disciplina')
 const auth = require('../auth')
+const Disciplina = require('../../models/disciplina')
 
 module.exports = function (app) {
   app.post('/atualizarDisciplina', async (req, res) => {
@@ -27,7 +27,7 @@ module.exports = function (app) {
 
     const disciplinaDuplicada = await Disciplina.findOne({ where: { nome, sigla } })
     if (disciplinaDuplicada) {
-      res.status(409).json({ message: "conflict: discipline already exists" })
+      res.status(409).json({ message: "discipline already exists" })
       return
     }
 
