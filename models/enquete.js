@@ -4,8 +4,8 @@ class Enquete extends Model {
   static init(sequelize) {
     super.init({
       quantidade: DataTypes.INTEGER,
-      dataAbertura: { field: 'data_abertura', type: DataTypes.DATE },
-      dataFechamento: { field: 'data_fechamento', type: DataTypes.DATE }
+      nome: DataTypes.STRING,
+      ativo: DataTypes.BOOLEAN
     }, {
       sequelize: sequelize,
       tableName: 'enquetes'

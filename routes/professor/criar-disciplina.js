@@ -39,7 +39,7 @@ module.exports = function (app) {
       res.json({ id: disciplina.id })
 
     }).catch(err => {
-      res.status(500).json({ message: `Error! ${err.message}` })
+      res.status(500).json({ message: `internal server error: ${err.message}` })
     })
 
   })

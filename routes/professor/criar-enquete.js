@@ -21,7 +21,7 @@ module.exports = function (app) {
       return
     }
 
-    const { disciplineId: disciplinaId, amountQuest: quantidade, dataAbertura, dataFechamento } = req.body
+    const { disciplineId: disciplinaId, amountQuest: quantidade, name: nome, active: ativo = false } = req.body
     if (!disciplinaId || !quantidade) {
       res.status(400).json({ message: "bad request" })
       return
@@ -33,19 +33,11 @@ module.exports = function (app) {
       return
     }
 
-
-    const now = new Date()
-    const tomorrow = new Date()
-    tomorrow.setDate(now.getDate() + 1)
-
-    sequelize.transaction(async (t) => {
+    if (ativo) {
       const enqueteAberta = await Enquete.findOne({
         where: {
           disciplinaId,
-          [Op.and]: [
-            { dataAbertura: { [Op.lte]: now } },
-            { dataFechamento: { [Op.gte]: now } }
-          ]
+          ativo: true
         }
       })
 
@@ -53,38 +45,30 @@ module.exports = function (app) {
         res.status(409).json({ message: "conflict: quizz already open" })
         return
       }
+    }
 
-      const enquete = await Enquete.create({
+    const nomeEnquete = await Enquete.findOne({
+      where: {
         disciplinaId,
-        quantidade,
-        dataAbertura: dataAbertura || now,
-        dataFechamento: dataFechamento || tomorrow
-      })
-
-
-      const bancoQuestoes = await Questao.findAll({ where: { disciplinaId } })
-      const alunosDisciplina = await AlunoDisciplina.findAll({ where: { disciplinaId } })
-
-      if (bancoQuestoes.length < quantidade) {
-        res.status(500).json({ message: `internal server error: ${err.message}` })
-        return
+        nome
       }
-      alunosDisciplina.forEach(aluno => {
-        const vetorQuestoes = []
+    })
 
-        do {
-          const questaoRand = getRandomInt(0, bancoQuestoes.length - 1);
-          const questaoId = bancoQuestoes[questaoRand].id
-          if (!vetorQuestoes.includes(questaoId)) vetorQuestoes.push(questaoId)
+    if (nomeEnquete) {
+      res.status(409).json({ message: "conflict: quizz name in use" })
+      return
+    }
 
-        } while (vetorQuestoes.length < quantidade)
-      })
-
-
-      res.json(enquete)
+    const enquete = await Enquete.create({
+      disciplinaId,
+      quantidade,
+      nome,
+      ativo
     }).catch(err => {
       res.status(500).json({ message: `internal server error: ${err.message}` })
     })
+
+    if (enquete) res.json(enquete)
 
   })
 }

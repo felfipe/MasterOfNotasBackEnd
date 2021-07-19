@@ -11,9 +11,9 @@ class Questao extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Disciplina, {
-      foreignKey: { field: 'disciplina_id', name: 'disciplinaId' },
-      as: 'disciplina'
+    this.belongsTo(models.Enquete, {
+      foreignKey: { field: 'enquete_id', name: 'enqueteId' },
+      as: 'enquete'
     })
   }
 }
