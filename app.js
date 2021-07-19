@@ -27,6 +27,7 @@ require('./routes/professor/encerrar-enquete')(app)
 
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)
+require('./routes/aluno/listar-enquetes-disponiveis')(app)
 
 app.listen(port, () => {
   require('./db-index')
