@@ -16,17 +16,14 @@ module.exports = function (app) {
       where: {
         alunoId: aluno.id
       },
-      include: [
-        {
-          association: 'enquete',
-          where: { ativo: true },
-          include: [
-            {
-              association: 'disciplina',
-              include: ['professor']
-            }]
-        }
-      ]
+      include: [{
+        association: 'enquete',
+        where: { ativo: true },
+        include: [{
+          association: 'disciplina',
+          include: ['professor']
+        }]
+      }]
     })
 
     const alunoEnquetes = enquetes.map(qq => ({
