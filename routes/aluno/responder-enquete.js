@@ -25,14 +25,14 @@ module.exports = function (app) {
       res.status(400).json({ message: "bad request" })
       return
     }
-
-    const alternativas = await Alternativa.findAll({ include: [{ association: 'questao', where: { enqueteId } }] })
-
+    
     const enquete = await Enquete.findByPk(enqueteId, { include: ['disciplina'] })
     if (!enquete || !enquete.ativo) {
       res.status(401).json({ message: "access danied" })
       return
     }
+
+    const alternativas = await Alternativa.findAll({ include: [{ association: 'questao', where: { enqueteId } }] })
 
     let valido = true
     respostas.forEach(resposta => {
