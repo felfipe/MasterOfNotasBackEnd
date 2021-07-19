@@ -14,7 +14,7 @@ module.exports = function (app) {
 
     const disciplinas = await AlunoDisciplina.findAll({
       where: {
-        emailAluno: aluno.email
+        alunoId: aluno.id
       },
       include: [{
         association: 'disciplina',
@@ -22,12 +22,10 @@ module.exports = function (app) {
       }]
     })
 
-    console.log(disciplinas)
-
     const alunoDisciplinas = disciplinas.map(dd => ({
       id: dd.disciplinaId,
       name: dd.disciplina.nome,
-      professor: dd.disciplina.professor.email
+      professor: dd.disciplina.professor.nome
     }))
 
     res.json(alunoDisciplinas)

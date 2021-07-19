@@ -7,7 +7,9 @@ const auth = require('../auth')
 module.exports = function (app) {
   app.post('/criarQuestao', async (req, res) => {
     const professor = await auth(req, res)
+
     if (!professor) return
+
     if (professor.tipoUsuario !== 'P') {
       res.status(401).json({ message: "access danied" })
       return
@@ -20,7 +22,7 @@ module.exports = function (app) {
     }
 
     const disciplina = await Disciplina.findByPk(disciplinaId)
-    if (!disciplina || disciplina.emailProfessor !== professor.email) {
+    if (!disciplina || disciplina.professorId !== professor.id) {
       res.status(401).json({ message: "unauthorized" })
       return
     }
