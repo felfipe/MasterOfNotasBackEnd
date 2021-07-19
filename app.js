@@ -20,6 +20,7 @@ require('./routes/professor/criar-disciplina')(app)
 require('./routes/professor/criar-questao')(app)
 require('./routes/professor/set-alunos-disciplina')(app)
 require('./routes/professor/atualizar-disciplina')(app)
+require('./routes/professor/listar-disciplinas')(app)
 
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)
