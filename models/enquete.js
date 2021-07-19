@@ -3,6 +3,7 @@ const { Model, DataTypes } = require('sequelize')
 class Enquete extends Model {
   static init(sequelize) {
     super.init({
+      quantidade: DataTypes.INTEGER,
       dataAbertura: { field: 'data_abertura', type: DataTypes.DATE },
       dataFechamento: { field: 'data_fechamento', type: DataTypes.DATE }
     }, {

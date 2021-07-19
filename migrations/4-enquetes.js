@@ -2,14 +2,14 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('questoes', {
+    await queryInterface.createTable('enquetes', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
       },
-      
+
       disciplina_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -19,9 +19,18 @@ module.exports = {
         }
       },
 
-      enunciado: {
-        type: Sequelize.TEXT,
+      nome: {
+        type: Sequelize.STRING,
+      },
+
+      quantidade: {
+        type: Sequelize.INTEGER,
         allowNull: false
+      },
+
+      ativo: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
 
       created_at: {
@@ -39,6 +48,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('questoes');
+    await queryInterface.dropTable('enquetes');
   }
 }

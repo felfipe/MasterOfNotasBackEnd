@@ -2,31 +2,26 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('enquetes', {
+    await queryInterface.createTable('questoes', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
+        primaryKey: true
       },
-
-      disciplina_id: {
+      
+      enquete_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'disciplinas',
+          model: 'enquetes',
           key: 'id'
         }
       },
 
-      data_abertura: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('NOW()')
-      },
-
-      data_fechamento: {
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('NOW()')
+      enunciado: {
+        type: Sequelize.TEXT,
+        allowNull: false
       },
 
       created_at: {
@@ -44,6 +39,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('enquetes');
+    await queryInterface.dropTable('questoes');
   }
 }
