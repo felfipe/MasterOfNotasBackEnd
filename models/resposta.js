@@ -10,6 +10,11 @@ class Resposta extends Model {
   }
 
   static associate(models) {
+    this.belongsTo(models.Usuario, {
+      foreignKey: { field: 'aluno_id', name: 'alunoId' },
+      as: 'aluno'
+    })
+
     this.belongsTo(models.Questao, {
       foreignKey: { field: 'questao_id', name: 'questaoId' },
       as: 'questao'

@@ -34,25 +34,26 @@ module.exports = function (app) {
       return
     }
 
+    let valido = true
+    respostas.forEach(resposta => {
+      const { questaoId, respostaId } = resposta
+      const validarResposta = alternativas.find(alt => alt.id === respostaId && alt.questaoId === questaoId)
+      if (!validarResposta) valido = false
+    })
+
+    if (!valido) {
+      res.status(400).json({ message: 'bad request: invalid answer' })
+      return
+    }
+
+    const respostasAluno = respostas.map(resposta => ({
+      alunoId: aluno.id,
+      questaoId: resposta.questaoId,
+      respostaId: resposta.respostaId
+    }))
+
     sequelize.transaction(async (t) => {
-      let valido = true
-      respostas.forEach(resposta => {
-        const { questaoId, respostaId } = resposta
-        const validarResposta = alternativas.find(alt => alt.id === respostaId && alt.questaoId === questaoId)
-        if (!validarResposta) valido = false
-      })
-
-      if (!valido) {
-        res.status(400).json({ message: 'bad request: invalid answer' })
-        return
-      }
-
-      const respostasAluno = respostas.map(resposta => ({
-        alunoId: aluno.id,
-        questaoId: resposta.questaoId,
-        respostaId: resposta.respostaId
-      }))
-      await Resposta.bulkCreate(respostasAluno)
+      await Resposta.bulkCreate(respostasAluno, { transaction: t })
 
       res.json({ status: 'OK' })
     }).catch(err => {

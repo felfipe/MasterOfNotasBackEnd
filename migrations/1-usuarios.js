@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false
       },
 
-      tipo_usuario: {
+      tipo: {
         type: Sequelize.STRING(1),
         allowNull: false,
         defaultValue: 'A'
