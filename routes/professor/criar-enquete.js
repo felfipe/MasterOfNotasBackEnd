@@ -1,11 +1,10 @@
-const sequelize = require('../../db-index')
+const { Op } = require('sequelize')
 const Disciplina = require('../../models/disciplina')
-const Questao = require('../../models/questao')
-const Alternativa = require('../../models/alternativa')
+const Enquete = require('../../models/enquete')
 const auth = require('../auth')
 
 module.exports = function (app) {
-  app.post('/criarQuestao', async (req, res) => {
+  app.post('/criarEnquete', async (req, res) => {
     const professor = await auth(req, res)
 
     if (!professor) return
@@ -15,8 +14,8 @@ module.exports = function (app) {
       return
     }
 
-    const { disciplineId: disciplinaId, enunciado, alternativas } = req.body
-    if (!disciplinaId || !enunciado || !alternativas || !alternativas.length) {
+    const { disciplineId: disciplinaId, dataAbertura, dataFechamento } = req.body
+    if (!disciplinaId) {
       res.status(400).json({ message: "bad request" })
       return
     }
@@ -27,24 +26,34 @@ module.exports = function (app) {
       return
     }
 
-    sequelize.transaction(async (t) => {
-      const questao = await Questao.create({
+
+    const now = new Date()
+    const tomorrow = new Date()
+    tomorrow.setDate(now.getDate() + 1)
+
+    const enqueteAberta = await Enquete.findOne({
+      where: {
         disciplinaId,
-        enunciado
-      }, { transaction: t })
-
-      const addAlternativas = alternativas.map(alternativa => ({
-        questaoId: questao.id,
-        enunciado: alternativa.enunciado,
-        alternativaCorreta: alternativa.correta
-      }))
-      await Alternativa.bulkCreate(addAlternativas, { transaction: t })
-
-      res.json({ id: questao.id })
-
-    }).catch(err => {
-      res.status(500).json({ message: `internal server error: ${err.message}` })
+        [Op.and]: [
+          { dataAbertura: { [Op.lte]: now } },
+          { dataFechamento: { [Op.gte]: now } }
+        ]
+      }
     })
 
+    if (enqueteAberta) {
+      res.status(409).json({ message: "conflict: quizz already open" })
+      return
+    }
+
+    const enquete = await Enquete.create({
+      disciplinaId,
+      dataAbertura: dataAbertura || now,
+      dataFechamento: dataFechamento || tomorrow
+    }).catch(err => {
+      res.status(500).json({ message: `Error! ${err.message}` })
+    })
+
+    if (enquete) res.json(enquete)
   })
 }

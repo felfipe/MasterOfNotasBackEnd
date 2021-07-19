@@ -16,11 +16,12 @@ require('./routes/signup')(app)
 
 // ---------------- Rotas professor ---------------- //
 require('./routes/professor/listar-alunos')(app)
+require('./routes/professor/listar-disciplinas')(app)
 require('./routes/professor/criar-disciplina')(app)
 require('./routes/professor/criar-questao')(app)
-require('./routes/professor/set-alunos-disciplina')(app)
+require('./routes/professor/criar-enquete')(app)
 require('./routes/professor/atualizar-disciplina')(app)
-require('./routes/professor/listar-disciplinas')(app)
+require('./routes/professor/set-alunos-disciplina')(app)
 
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)
