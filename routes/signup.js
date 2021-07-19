@@ -6,14 +6,14 @@ const minute = 60
 
 module.exports = function (app) {
   app.post('/signup', async (req, res) => {
-    const { password, name: username, userType, email } = req.body
+    const { senha, nome, tipo, email } = req.body
 
-    if (!email || !password || !username || !userType) {
+    if (!email || !senha || !nome || !tipo) {
       res.status(400).json({ message: "bad request" })
       return
     }
 
-    if (username == "" || (userType != "PROFESSOR" && userType != "ALUNO")) {
+    if (nome == "" || (tipo != "PROFESSOR" && tipo != "ALUNO")) {
       res.status(400).json({ message: "bad request: empty name ou invalid type" })
       return
     }
@@ -23,25 +23,25 @@ module.exports = function (app) {
       return
     }
 
-    if (password.length < 6) {
+    if (senha.length < 6) {
       res.status(400).json({ message: "bad request: short password" })
       return
     }
 
-    const emailInUse = await Usuario.findOne({ where: { email } })
-    if (emailInUse) {
+    const emailEmUso = await Usuario.findOne({ where: { email } })
+    if (emailEmUso) {
       res.status(409).json({ message: "user already exists" })
       return
     }
 
     const salt = await bcrypt.genSalt()
-    const hash = await bcrypt.hash(password, salt)
+    const hash = await bcrypt.hash(senha, salt)
 
     const usuario = await Usuario.create({
       email,
       senha: hash,
-      nome: username,
-      tipoUsuario: (userType == "PROFESSOR") ? 'P' : 'A'
+      nome,
+      tipo: (tipo == "PROFESSOR") ? 'P' : 'A'
     }).catch(err => {
       res.status(500).json({ message: `internal server error: ${err}` })
     })
@@ -50,7 +50,7 @@ module.exports = function (app) {
       const { id } = usuario
       const token = jwt.sign({ id }, process.env.SECRET, { expiresIn: 60 * minute })
 
-      res.json({ auth: true, token: token, name: username, userType: userType })
+      res.json({ auth: true, token: token, nome, tipo })
     }
   })
 }

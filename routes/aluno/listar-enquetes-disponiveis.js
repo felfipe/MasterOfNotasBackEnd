@@ -7,7 +7,7 @@ module.exports = function (app) {
 
     if (!aluno) return
 
-    if (aluno.tipoUsuario !== 'A') {
+    if (aluno.tipo !== 'A') {
       res.status(401).json({ message: "access danied" })
       return
     }
@@ -28,11 +28,11 @@ module.exports = function (app) {
 
     const alunoEnquetes = enquetes.map(qq => ({
       enqueteId: qq.enquete.id,
-      name: qq.enquete.nome,
-      discipline: {
+      nome: qq.enquete.nome,
+      disciplina: {
         id: qq.enquete.disciplinaId,
-        name: qq.enquete.disciplina.nome,
-        initial: qq.enquete.disciplina.sigla
+        nome: qq.enquete.disciplina.nome,
+        sigla: qq.enquete.disciplina.sigla
       },
       professor: qq.enquete.disciplina.professor.nome
     }))

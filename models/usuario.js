@@ -6,7 +6,7 @@ class Usuario extends Model {
       email: DataTypes.STRING,
       senha: DataTypes.STRING,
       nome: DataTypes.STRING,
-      tipoUsuario: DataTypes.STRING,
+      tipo: DataTypes.STRING,
     }, {
       sequelize: sequelize,
       tableName: 'usuarios'

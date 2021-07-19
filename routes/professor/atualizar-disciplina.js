@@ -7,19 +7,18 @@ module.exports = function (app) {
 
     if (!professor) return
 
-    if (professor.tipoUsuario !== 'P') {
+    if (professor.tipo !== 'P') {
       res.status(401).json({ message: "access danied" })
       return
     }
 
-    const { disciplineId: disciplinaId, name: nome, initial: sigla } = req.body
+    const { disciplinaId: disciplinaId, nome, sigla } = req.body
     if (!disciplinaId || !nome) {
       res.status(400).json({ message: "bad resquest" })
       return
     }
 
     const disciplina = await Disciplina.findByPk(disciplinaId)
-    console.log({ disciplina })
     if (!disciplina || disciplina.professorId !== professor.id) {
       res.status(401).json({ message: "access danied" })
       return

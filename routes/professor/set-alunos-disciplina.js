@@ -10,12 +10,12 @@ module.exports = function (app) {
 
     if (!professor) return
 
-    if (professor.tipoUsuario !== 'P') {
+    if (professor.tipo !== 'P') {
       res.status(401).json({ message: "access danied" })
       return
     }
 
-    const { disciplineId: disciplinaId, alunosId } = req.body
+    const { disciplinaId, alunosId } = req.body
     if (!disciplinaId || !alunosId) {
       res.status(400).json({ message: "bad request" })
       return

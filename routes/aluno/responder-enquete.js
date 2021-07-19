@@ -15,12 +15,12 @@ module.exports = function (app) {
 
     if (!aluno) return
 
-    if (aluno.tipoUsuario !== 'A') {
+    if (aluno.tipo !== 'A') {
       res.status(401).json({ message: "access danied" })
       return
     }
 
-    const { enqueteId, answers: respostas } = req.body
+    const { enqueteId, respostas } = req.body
     if (!enqueteId || !respostas) {
       res.status(400).json({ message: "bad request" })
       return

@@ -9,7 +9,7 @@ module.exports = function (app) {
 
     if (!aluno) return
 
-    if (aluno.tipoUsuario !== 'A') {
+    if (aluno.tipo !== 'A') {
       res.status(401).json({ message: "access danied" })
       return
     }

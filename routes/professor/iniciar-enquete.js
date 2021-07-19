@@ -16,7 +16,7 @@ module.exports = function (app) {
 
     if (!professor) return
 
-    if (professor.tipoUsuario !== 'P') {
+    if (professor.tipo !== 'P') {
       res.status(401).json({ message: "access danied" })
       return
     }
