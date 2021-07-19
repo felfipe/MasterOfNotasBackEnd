@@ -15,6 +15,10 @@ module.exports = function (app) {
     }
 
     const { enqueteId } = req.body
+    if (!enqueteId) {
+      res.status(400).json({ message: "bad request" })
+      return
+    }
 
     const questionario = await Questionario.findOne({
       where: {

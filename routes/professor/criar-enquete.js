@@ -15,7 +15,7 @@ module.exports = function (app) {
     }
 
     const { disciplinaId, quantidade, nome, ativo = false } = req.body
-    if (!disciplinaId || !quantidade) {
+    if (!disciplinaId || !quantidade || !nome) {
       res.status(400).json({ message: "bad request" })
       return
     }
