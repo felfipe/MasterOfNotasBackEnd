@@ -1,7 +1,4 @@
 const auth = require('../auth')
-
-const AlunoDisciplinas = require("../../models/aluno-disciplina")
-const Enquete = require("../../models/enquete")
 const Questionario = require("../../models/questionario")
 
 module.exports = function (app) {
