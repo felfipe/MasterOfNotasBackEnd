@@ -22,6 +22,7 @@ require('./routes/professor/criar-questao')(app)
 require('./routes/professor/criar-enquete')(app)
 require('./routes/professor/atualizar-disciplina')(app)
 require('./routes/professor/set-alunos-disciplina')(app)
+require('./routes/professor/iniciar-enquete')(app)
 
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)

@@ -6,18 +6,18 @@ class Questionario extends Model {
       questoesId: { field: 'questoes_id', type: DataTypes.ARRAY(DataTypes.INTEGER) }
     }, {
       sequelize: sequelize,
-      tableName: 'questionario'
+      tableName: 'questionarios'
     })
   }
 
   static associate(models) {
-    this.belongsTo(models.Questionario, {
-      foreignKey: 'id',
-      as: 'questionario'
+    this.belongsTo(models.Enquete, {
+      foreignKey: { field: 'enquete_id', name: 'enqueteId' },
+      as: 'enquete'
     })
 
     this.belongsTo(models.Usuario, {
-      foreignKey: 'email',
+      foreignKey: { field: 'aluno_id', name: 'alunoId' },
       as: 'aluno'
     })
   }

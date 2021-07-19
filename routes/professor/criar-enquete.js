@@ -6,10 +6,6 @@ const Enquete = require('../../models/enquete')
 const Questao = require('../../models/questao')
 const auth = require('../auth')
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
 module.exports = function (app) {
   app.post('/criarEnquete', async (req, res) => {
     const professor = await auth(req, res)
@@ -42,7 +38,7 @@ module.exports = function (app) {
       })
 
       if (enqueteAberta) {
-        res.status(409).json({ message: "conflict: quizz already open" })
+        res.status(409).json({ message: "conflict: quizz already opened" })
         return
       }
     }
