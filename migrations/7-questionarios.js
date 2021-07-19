@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('quizz', {
+    await queryInterface.createTable('questionarios', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -10,11 +10,11 @@ module.exports = {
         primaryKey: true,
       },
 
-      questionario_id: {
+      enquete_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'questionarios',
+          model: 'enquetes',
           key: 'id'
         }
       },
@@ -48,6 +48,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('quizz');
+    await queryInterface.dropTable('questionarios');
   }
 }

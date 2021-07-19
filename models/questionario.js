@@ -3,18 +3,22 @@ const { Model, DataTypes } = require('sequelize')
 class Questionario extends Model {
   static init(sequelize) {
     super.init({
-      dataAbertura: { field: 'data_abertura', type: DataTypes.DATE },
-      dataFechamento: { field: 'data_fechamento', type: DataTypes.DATE }
+      questoesId: { field: 'questoes_id', type: DataTypes.ARRAY(DataTypes.INTEGER) }
     }, {
       sequelize: sequelize,
-      tableName: 'questionarios'
+      tableName: 'questionario'
     })
   }
 
   static associate(models) {
-    this.belongsTo(models.Disciplina, {
-      foreignKey: { field: 'disciplina_id', name: 'disciplinaId' },
-      as: 'disciplina'
+    this.belongsTo(models.Questionario, {
+      foreignKey: 'id',
+      as: 'questionario'
+    })
+
+    this.belongsTo(models.Usuario, {
+      foreignKey: 'email',
+      as: 'aluno'
     })
   }
 }

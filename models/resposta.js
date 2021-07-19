@@ -10,9 +10,9 @@ class Resposta extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Quizz, {
+    this.belongsTo(models.Questionario, {
       foreignKey: 'id',
-      as: 'quizz'
+      as: 'questionario'
     })
 
     this.belongsTo(models.Alternativa, {

@@ -3,8 +3,8 @@ const Disciplina = require('./disciplina')
 const Questao = require('./questao')
 const Alternativa = require('./alternativa')
 const AlunoDisciplina = require('./aluno-disciplina')
-const Questionario = require('./questionario')
-const Quizz = require('./quizz')
+const Questionario = require('./enquete')
+const Quizz = require('./questionario')
 const Resposta = require('./resposta')
 
 function initModels(connection) {

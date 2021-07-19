@@ -10,11 +10,11 @@ module.exports = {
         primaryKey: true,
       },
 
-      quizz_id: {
+      questionario_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'quizz',
+          model: 'questionarios',
           key: 'id'
         }
       },
