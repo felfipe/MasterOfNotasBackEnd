@@ -16,7 +16,7 @@ module.exports = function (app) {
       return
     }
 
-    const { quizzId: enqueteId, enunciado, alternativas } = req.body
+    const { enqueteId, enunciado, alternativas } = req.body
     if (!enqueteId || !enunciado || !alternativas || !alternativas.length) {
       res.status(400).json({ message: "bad request" })
       return

@@ -3,18 +3,22 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('respostas', {
-      id: {
+      aluno_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        references: {
+          model: 'usuarios',
+          key: 'id'
+        }
       },
 
-      questionario_id: {
+      questao_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
-          model: 'questionarios',
+          model: 'questoes',
           key: 'id'
         }
       },
@@ -22,7 +26,6 @@ module.exports = {
       resposta_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
         references: {
           model: 'alternativas',
           key: 'id'

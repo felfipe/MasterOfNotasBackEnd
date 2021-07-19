@@ -27,7 +27,7 @@ module.exports = function (app) {
     })
 
     const alunoEnquetes = enquetes.map(qq => ({
-      quizzId: qq.id,
+      enqueteId: qq.enquete.id,
       name: qq.enquete.nome,
       discipline: {
         id: qq.enquete.disciplinaId,

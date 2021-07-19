@@ -12,7 +12,7 @@ class Alternativa extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Disciplina, {
+    this.belongsTo(models.Questao, {
       foreignKey: { field: 'questao_id', name: 'questaoId' },
       as: 'questao'
     })

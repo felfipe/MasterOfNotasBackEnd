@@ -15,6 +15,11 @@ class Questao extends Model {
       foreignKey: { field: 'enquete_id', name: 'enqueteId' },
       as: 'enquete'
     })
+
+    this.hasMany(models.Alternativa, {
+      foreignKey: { field: 'questao_id', name: 'questaoId' },
+      as: 'alternativas'
+    })
   }
 }
 

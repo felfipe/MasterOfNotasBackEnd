@@ -3,12 +3,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('aluno_disciplinas', {
-      id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        autoIncrement: true
-      },
-
       aluno_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
