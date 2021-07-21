@@ -1,9 +1,14 @@
 {
-  "username": "doadmin",
-  "password": "pbe1itm50cjsgvnr",
-  "database": "defaultdb",
-  "port": 25060,
   "host": "db-master-of-notas-do-user-9520776-0.b.db.ondigitalocean.com",
+  "username": "doadmin",
+  "database": "defaultdb",
+  "password": "pbe1itm50cjsgvnr",
+  "port": 25060,
+  "_host": "ec2-23-23-164-251.compute-1.amazonaws.com",
+  "_database": "d53tnls1otbkqd",
+  "_username": "ujdsdrjmxfnnij",
+  "_password": "8d0bb9b04ec30bff54af268e086eef0e7659d6221a82335ed9abf61826e8e28e",
+  "_port": 5432,
   "dialect": "postgres",
   "dialectOptions": {
     "ssl": {
