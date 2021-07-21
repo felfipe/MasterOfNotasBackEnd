@@ -12,7 +12,10 @@ module.exports = function (app) {
             return
         }
 
-        const enquetes = await Enquete.findByPk(req.query.idEnquete)
+        const enquetes = await Enquete.findOne({
+            where: { id: req.query.idEnquete },
+            include: [{ association: 'disciplina' }],
+        })
 
         res.json(enquetes)
     })
