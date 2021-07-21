@@ -24,6 +24,8 @@ require('./routes/professor/atualizar-disciplina')(app)
 require('./routes/professor/set-alunos-disciplina')(app)
 require('./routes/professor/iniciar-enquete')(app)
 require('./routes/professor/encerrar-enquete')(app)
+require('./routes/professor/listar-disciplina')(app)
+require('./routes/professor/deletar-disciplina')(app)
 
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)
