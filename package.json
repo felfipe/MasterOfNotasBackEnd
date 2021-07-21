@@ -4,6 +4,7 @@
   "description": "Repositório para a aplicação back-end do sistema MasterOfNotas",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js"
   },
   "repository": {
