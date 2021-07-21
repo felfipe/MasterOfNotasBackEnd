@@ -16,7 +16,9 @@ module.exports = {
         references: {
           model: 'enquetes',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       aluno_id: {
@@ -25,7 +27,9 @@ module.exports = {
         references: {
           model: 'usuarios',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       questoes_id: {

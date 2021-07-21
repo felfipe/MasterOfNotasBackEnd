@@ -16,7 +16,9 @@ module.exports = {
         references: {
           model: 'usuarios',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       questao_id: {
@@ -26,7 +28,9 @@ module.exports = {
         references: {
           model: 'questoes',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       resposta_id: {
@@ -35,7 +39,9 @@ module.exports = {
         references: {
           model: 'alternativas',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       created_at: {

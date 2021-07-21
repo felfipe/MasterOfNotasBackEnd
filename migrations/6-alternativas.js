@@ -16,7 +16,9 @@ module.exports = {
         references: {
           model: 'questoes',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       enunciado: {

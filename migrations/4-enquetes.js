@@ -16,7 +16,9 @@ module.exports = {
         references: {
           model: 'disciplinas',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       nome: {

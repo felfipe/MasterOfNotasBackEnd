@@ -16,7 +16,9 @@ module.exports = {
         references: {
           model: 'enquetes',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       enunciado: {

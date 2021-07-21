@@ -16,7 +16,9 @@ module.exports = {
         references: {
           model: 'usuarios',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       disciplina_id: {
@@ -26,7 +28,9 @@ module.exports = {
         references: {
           model: 'disciplinas',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
 
       created_at: {
