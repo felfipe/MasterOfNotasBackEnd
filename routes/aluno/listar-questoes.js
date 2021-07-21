@@ -14,7 +14,7 @@ module.exports = function (app) {
       return
     }
 
-    const { enqueteId } = req.body
+    const { enqueteId } = req.query
     if (!enqueteId) {
       res.status(400).json({ message: "bad request" })
       return
