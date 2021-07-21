@@ -33,6 +33,7 @@ require('./routes/aluno/listar-disciplinas')(app)
 require('./routes/aluno/listar-enquetes-disponiveis')(app)
 require('./routes/aluno/listar-questoes')(app)
 require('./routes/aluno/responder-enquete')(app)
+require('./routes/aluno/listar-enquete-by-id')(app)
 
 app.listen(port, () => {
   require('./db-index')
