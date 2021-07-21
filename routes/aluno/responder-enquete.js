@@ -5,10 +5,6 @@ const Enquete = require('../../models/enquete')
 const Resposta = require('../../models/resposta')
 const Alternativa = require('../../models/alternativa')
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
 module.exports = function (app) {
   app.post('/responderEnquete', async (req, res) => {
     const aluno = await auth(req, res)
