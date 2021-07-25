@@ -11,10 +11,17 @@ module.exports = function (app) {
       res.status(401).json({ message: "access danied" })
       return
     }
+    const idDisciplina = req.query.idDisciplina
+
+    if (!idDisciplina) {
+      res.status(400).json({ message: "bad request!" })
+      return
+    }
 
     const enquetes = await Questionario.findAll({
       where: {
-        alunoId: aluno.id
+        alunoId: aluno.id,
+        disciplinaId: idDisciplina
       },
       include: [{
         association: 'enquete',

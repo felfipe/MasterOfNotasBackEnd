@@ -25,6 +25,7 @@ module.exports = function (app) {
     const alunoDisciplinas = disciplinas.map(dd => ({
       id: dd.disciplinaId,
       nome: dd.disciplina.nome,
+      sigla: dd.disciplina.sigla,
       professor: dd.disciplina.professor.nome
     }))
 

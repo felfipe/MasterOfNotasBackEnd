@@ -29,7 +29,7 @@ require('./routes/professor/deletar-disciplina')(app)
 require('./routes/professor/listar-enquetes')(app)
 require('./routes/professor/relatorio-enquete')(app)
 require('./routes/professor/deletar-questao')(app)
-
+require('./routes/professor/listar-questoes')(app)
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)
 require('./routes/aluno/listar-enquetes-disponiveis')(app)
