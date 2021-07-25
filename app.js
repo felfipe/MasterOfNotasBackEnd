@@ -28,6 +28,7 @@ require('./routes/professor/listar-disciplina')(app)
 require('./routes/professor/deletar-disciplina')(app)
 require('./routes/professor/listar-enquetes')(app)
 require('./routes/professor/relatorio-enquete')(app)
+require('./routes/professor/deletar-questao')(app)
 
 // ---------------- Rotas aluno ---------------- //
 require('./routes/aluno/listar-disciplinas')(app)
