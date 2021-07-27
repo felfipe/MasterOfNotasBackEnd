@@ -39,7 +39,7 @@ module.exports = function (app) {
       const alunosEmailRemove = alunosRemove.map(aluno => aluno.alunoId)
       await AlunoDisciplina.destroy({ where: { disciplinaId, alunoId: alunosEmailRemove } }, { transaction: t })
 
-      res.json({ status: 'OK' })
+      res.json({ message: "Success!" })
 
     }).catch(err => {
       res.status(500).json({ message: `internal server error: ${err.message}` })

@@ -1,5 +1,6 @@
 const auth = require('../auth')
-const Questionario = require("../../models/questionario")
+const Enquete = require("../../models/enquete")
+const Questao = require("../../models/questao")
 
 module.exports = function (app) {
     app.post('/deletarQuestao', async (req, res) => {
@@ -10,33 +11,26 @@ module.exports = function (app) {
             res.status(401).json({ message: "access danied" })
             return
         }
-        const { idQuestionario, idQuestao } = req.body;
 
-        if (!idQuestionario | !idQuestao) {
+        const { enqueteId, questaoId } = req.body;
+
+        if (!enqueteId || !questaoId) {
             res.status(401).json({ message: "Bad request!" })
             return
         }
 
-
-
-        questionario = await Questionario.findByPk(idQuestionario)
-        if (!questionario.questoesId.includes(parseInt(idQuestao))) {
-            res.status(401).json({ message: "Question not associated!" })
+        const enquete = await Enquete.findByPk(enqueteId, { include: 'disciplina' })
+        if (!enquete || enquete.disciplina.professorId !== professor.id) {
+            res.status(401).json({ message: "unauthorized" })
             return
         }
 
-
-        const index = questionario.questoesId.indexOf(parseInt(idQuestao))
-        questionario.questoesId.splice(index, 1)
-
-        const questionarioUpdate = await Questionario.update({
-            questoesId: questionario.questoesId
-        }, {
+        await Questao.destroy({
             where: {
-                id: idQuestionario
+                id: questaoId
             }
         })
-        if (questionarioUpdate)
-            res.json({ message: "Success!" })
+
+        res.json({ message: "Success!" })
     })
 }

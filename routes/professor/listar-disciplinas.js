@@ -13,9 +13,7 @@ module.exports = function (app) {
     }
 
     const disciplinas = await Disciplina.findAll({
-      where: {
-        professorId: professor.id
-      }
+      where: { professorId: professor.id }
     })
 
     res.json(disciplinas)

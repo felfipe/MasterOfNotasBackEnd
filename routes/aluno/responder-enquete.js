@@ -21,7 +21,7 @@ module.exports = function (app) {
       res.status(400).json({ message: "bad request" })
       return
     }
-    
+
     const enquete = await Enquete.findByPk(enqueteId, { include: ['disciplina'] })
     if (!enquete || !enquete.ativo) {
       res.status(401).json({ message: "access danied" })
@@ -51,7 +51,7 @@ module.exports = function (app) {
     sequelize.transaction(async (t) => {
       await Resposta.bulkCreate(respostasAluno, { transaction: t })
 
-      res.json({ status: 'OK' })
+      res.json({ message: "Success!" })
     }).catch(err => {
       res.status(500).json({ message: `internal server error: ${err.message}` })
     })

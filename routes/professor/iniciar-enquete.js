@@ -70,7 +70,7 @@ module.exports = function (app) {
 
       await Promise.all(promises)
 
-      res.json({ status: 'OK' })
+      res.json({ message: "Success!" })
 
     }).catch(err => {
       res.status(500).json({ message: `internal server error: ${err.message}` })

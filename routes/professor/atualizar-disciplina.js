@@ -38,7 +38,7 @@ module.exports = function (app) {
     })
 
     if (disciplinaAtulizada) {
-      res.json({ status: 'OK' })
+      res.json({ message: "Success!" })
     }
 
   })

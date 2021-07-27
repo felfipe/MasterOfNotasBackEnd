@@ -37,7 +37,7 @@ module.exports = function (app) {
       res.status(500).json({ message: `internal server error: ${err.message}` })
     })
 
-    res.json({ status: 'OK' })
+    res.json({ message: "Success!" })
 
   })
 }
