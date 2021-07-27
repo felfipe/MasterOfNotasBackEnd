@@ -11,13 +11,13 @@ module.exports = function (app) {
             return
         }
 
-        const { idDisciplina } = req.body
-        if (!idDisciplina) {
+        const { disciplinaId } = req.body
+        if (!disciplinaId) {
             res.status(400).json({ message: "bad request" })
             return
         }
 
-        const disciplina = await Disciplina.findByPk(idDisciplina)
+        const disciplina = await Disciplina.findByPk(disciplinaId)
 
         if (!disciplina || disciplina.professorId !== professor.id) {
             res.status(401).json({ message: "unauthorized" })
