@@ -11,7 +11,7 @@ module.exports = function (app) {
             return
         }
 
-        const { disciplinaId } = req.body
+        const { disciplinaId } = req.query
         const disciplina = await Disciplina.findByPk(disciplinaId)
         if (!disciplina || disciplina.professorId !== professor.id) {
             res.status(401).json({ message: "unauthorized" })
