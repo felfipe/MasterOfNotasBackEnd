@@ -28,10 +28,10 @@ module.exports = function (app) {
         }
 
         const questoes = await Questao.findAll({
-            where: {
-                enqueteId
-            }, include: ['alternativas']
-        }).map(questao => ({
+            where: { enqueteId }, include: ['alternativas']
+        })
+
+        const qq = questoes.map(questao => ({
             questaoId: questao.id,
             enunciado: questao.enunciado,
             alternativas: questao.alternativas.map(alt => ({
@@ -41,6 +41,6 @@ module.exports = function (app) {
             }))
         }))
 
-        res.json(questoesQuestionario)
+        res.json(qq)
     })
 }
