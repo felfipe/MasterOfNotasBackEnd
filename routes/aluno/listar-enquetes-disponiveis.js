@@ -11,17 +11,10 @@ module.exports = function (app) {
       res.status(401).json({ message: "access danied" })
       return
     }
-    const disciplinaId = req.query.disciplinaId
 
-    if (!disciplinaId) {
-      res.status(400).json({ message: "bad request!" })
-      return
-    }
-
-    const enquetes = await Questionario.findAll({
+    const questionarios = await Questionario.findAll({
       where: {
-        alunoId: aluno.id,
-        disciplinaId: disciplinaId
+        alunoId: aluno.id
       },
       include: [{
         association: 'enquete',
@@ -33,17 +26,17 @@ module.exports = function (app) {
       }]
     })
 
-    const alunoEnquetes = enquetes.map(qq => ({
+    const enquetesDoAluno = questionarios.map(qq => ({
       enqueteId: qq.enquete.id,
       nome: qq.enquete.nome,
       disciplina: {
-        id: qq.enquete.disciplinaId,
+        disciplinaId: qq.enquete.disciplinaId,
         nome: qq.enquete.disciplina.nome,
         sigla: qq.enquete.disciplina.sigla
       },
       professor: qq.enquete.disciplina.professor.nome
     }))
 
-    res.json(alunoEnquetes)
+    res.json(enquetesDoAluno)
   })
 }
