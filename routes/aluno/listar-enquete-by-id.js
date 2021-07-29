@@ -5,15 +5,15 @@ module.exports = function (app) {
     app.get('/listarEnqueteById', async (req, res) => {
         const usuario = await auth(req, res)
         if (!usuario) return
-        const idEnquete = req.query.idEnquete
+        const enqueteId = req.query.enqueteId
 
-        if (!idEnquete) {
+        if (!enqueteId) {
             res.status(401).json({ message: "Bad Request!" })
             return
         }
 
         const enquetes = await Enquete.findOne({
-            where: { id: req.query.idEnquete },
+            where: { id: req.query.enqueteId },
             include: [{ association: 'disciplina' }],
         })
 
