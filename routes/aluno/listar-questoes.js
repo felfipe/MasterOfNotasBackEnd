@@ -4,7 +4,7 @@ const Questao = require("../../models/questao")
 const Questionario = require('../../models/questionario')
 
 module.exports = function (app) {
-  app.get('/listarQuestoes', async (req, res) => {
+  app.get('/listarQuestoesEnquete', async (req, res) => {
     const aluno = await auth(req, res)
 
     if (!aluno) return
