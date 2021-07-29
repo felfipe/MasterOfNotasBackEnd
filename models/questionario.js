@@ -3,7 +3,9 @@ const { Model, DataTypes } = require('sequelize')
 class Questionario extends Model {
   static init(sequelize) {
     super.init({
-      questoesId: { field: 'questoes_id', type: DataTypes.ARRAY(DataTypes.INTEGER) }
+      questoesId: { field: 'questoes_id', type: DataTypes.ARRAY(DataTypes.INTEGER) },
+      respondido: DataTypes.BOOLEAN,
+      nota: DataTypes.REAL
     }, {
       sequelize: sequelize,
       tableName: 'questionarios'

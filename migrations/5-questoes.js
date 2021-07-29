@@ -31,7 +31,16 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('NOW()')
       },
-
+      respondido: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: Sequelize.literal('NOW()')
+      },
+      nota: {
+        allowNull: false,
+        type: Sequelize.REAL,
+        defaultValue: Sequelize.literal('NOW()')
+      },
       updated_at: {
         allowNull: false,
         type: Sequelize.DATE,

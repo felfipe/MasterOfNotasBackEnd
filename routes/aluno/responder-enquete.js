@@ -3,6 +3,7 @@ const sequelize = require('../../db-index')
 
 const Enquete = require('../../models/enquete')
 const Resposta = require('../../models/resposta')
+const Questionario = require('../../models/questionario')
 const Alternativa = require('../../models/alternativa')
 
 module.exports = function (app) {
@@ -31,10 +32,14 @@ module.exports = function (app) {
     const alternativas = await Alternativa.findAll({ include: [{ association: 'questao', where: { enqueteId } }] })
 
     let valido = true
+    
+    let acertos = 0
     respostas.forEach(resposta => {
       const { questaoId, respostaId } = resposta
       const validarResposta = alternativas.find(alt => alt.id === respostaId && alt.questaoId === questaoId)
       if (!validarResposta) valido = false
+      if(validarResposta.alternativaCorreta)
+        acertos +=1
     })
 
     if (!valido) {
@@ -47,7 +52,15 @@ module.exports = function (app) {
       questaoId: resposta.questaoId,
       respostaId: resposta.respostaId
     }))
-
+    const questionario = Questionario.findOne({
+      where:{
+        alunoId: aluno.id,
+        enqueteId: enqueteId
+      }
+    })
+    const totalQuestoes = questionario.questoesId.length
+    const nota = (acertos / totalQuestoes)*10
+    ;(await questionario).update({nota: nota})
     sequelize.transaction(async (t) => {
       await Resposta.bulkCreate(respostasAluno, { transaction: t })
 

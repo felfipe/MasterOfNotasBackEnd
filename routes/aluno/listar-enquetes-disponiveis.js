@@ -18,25 +18,25 @@ module.exports = function (app) {
       },
       include: [{
         association: 'enquete',
-        where: { ativo: true },
         include: [{
           association: 'disciplina',
           include: ['professor']
         }]
       }]
     })
-
-    const enquetesDoAluno = questionarios.map(qq => ({
-      enqueteId: qq.enquete.id,
-      nome: qq.enquete.nome,
-      disciplina: {
-        disciplinaId: qq.enquete.disciplinaId,
-        nome: qq.enquete.disciplina.nome,
-        sigla: qq.enquete.disciplina.sigla
-      },
-      professor: qq.enquete.disciplina.professor.nome
-    }))
-
-    res.json(enquetesDoAluno)
+    const result = questionarios.map(questionario => ({
+        enqueteId: questionario.enquete.id,
+        nome: questionario.enquete.nome,
+        disciplina: {
+          disciplinaId: questionario.enquete.disciplinaId,
+          nome: questionario.enquete.disciplina.nome,
+          sigla: questionario.enquete.disciplina.sigla
+        },
+        professor: questionario.enquete.disciplina.professor.nome,
+        respondido: questionario.respondido,
+        nota: questionario.nota,
+        ativo: questionario.enquete.ativo
+      }))
+    res.json(result)
   })
 }
