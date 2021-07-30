@@ -52,7 +52,7 @@ module.exports = function (app) {
       questaoId: resposta.questaoId,
       respostaId: resposta.respostaId
     }))
-    const questionario = Questionario.findOne({
+    const questionario = await Questionario.findOne({
       where:{
         alunoId: aluno.id,
         enqueteId: enqueteId
@@ -60,10 +60,10 @@ module.exports = function (app) {
     })
     const totalQuestoes = questionario.questoesId.length
     const nota = (acertos / totalQuestoes)*10
-    ;(await questionario).update({nota: nota})
+    
     sequelize.transaction(async (t) => {
       await Resposta.bulkCreate(respostasAluno, { transaction: t })
-
+      ;(await questionario).update({nota: nota, respondido: true})
       res.json({ message: "Success!" })
     }).catch(err => {
       res.status(500).json({ message: `internal server error: ${err.message}` })

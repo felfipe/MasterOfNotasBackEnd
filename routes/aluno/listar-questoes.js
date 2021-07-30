@@ -13,7 +13,6 @@ module.exports = function (app) {
       res.status(401).json({ message: "access danied" })
       return
     }
-
     const { enqueteId } = req.query
     if (!enqueteId) {
       res.status(400).json({ message: "bad request" })
@@ -23,7 +22,7 @@ module.exports = function (app) {
     const questionario = await Questionario.findOne({
       where: {
         alunoId: aluno.id,
-        enqueteId
+        enqueteId: enqueteId
       }, include: [{
         association: 'enquete',
         where: { ativo: true }

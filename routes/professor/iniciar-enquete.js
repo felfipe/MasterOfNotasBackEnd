@@ -47,8 +47,28 @@ module.exports = function (app) {
       return
     }
 
+
+    await Enquete.update({ ativo: true }, { where: { id: enqueteId }})
+
+    const a_test = alunosMatriculados[0]
+    if(!a_test){
+      res.status(401).json({ message: "Error no students registred" })
+      return
+    }
+    const questionario = await Questionario.findOne({
+      where: {
+        enqueteId,
+        alunoId: a_test.alunoId
+      }
+    })
+
+    if(questionario){
+      res.json({ message: "Success!" })
+      return
+    }
+    
     sequelize.transaction(async (t) => {
-      await Enquete.update({ ativo: true }, { where: { id: enqueteId }, transaction: t })
+      
 
       const promises = []
       alunosMatriculados.forEach(aluno => {
@@ -59,13 +79,17 @@ module.exports = function (app) {
           if (!questoesAluno.includes(questaoId)) questoesAluno.push(questaoId)
         } while (questoesAluno.length < enquete.quantidade)
 
-        const promise = Questionario.create({
-          enqueteId,
-          alunoId: aluno.alunoId,
-          questoesId: questoesAluno
-        }, { transaction: t })
+        
+        console.log(questionario)
+        if(!questionario){
+          const promise = Questionario.create({
+            enqueteId,
+            alunoId: aluno.alunoId,
+            questoesId: questoesAluno
+          }, { transaction: t })
 
-        promises.push(promise)
+          promises.push(promise)
+      }
       })
 
       await Promise.all(promises)
